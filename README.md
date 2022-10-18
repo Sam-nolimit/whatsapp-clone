@@ -1,6 +1,4 @@
-# week-10-node-009-live-project
 
-Victoria Abioye
 1. installed passport, express, express-session, passport-google-oauth2 and their types
 
 
