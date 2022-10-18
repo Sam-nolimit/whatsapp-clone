@@ -1,0 +1,1408 @@
+openapi: 3.0.0
+info:
+  title: Messenger-API
+  contact: {}
+  version: '1.1'
+servers:
+- url: https://samson-messenger-api.herokuapp.com/
+  variables: {}
+- url: http://localhost:5000
+  variables: {}
+paths:
+  /users/signup:
+    post:
+      tags:
+      - SignUp And Login
+      summary: user signup
+      description: "*User Story*  \n  \nAs a user, I want to be able to register using my email and choosing a password. A verification email should be sent to enable to verify my account.  \n  \n*+Acceptance Criteria:+*  \n * Input fields to enter are Email Address and Password.  \n * All fields should be required.  \n * Emails should be unique.  \n* Verification email must be sent on successful signup"
+      operationId: usersignup
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/usersignuprequest'
+            example:
+              firstName: Foluso
+              lastName: Kayode
+              email: folusolibrary@gmail.com
+              phoneNumber: 08169606970
+              password: '12345'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /users/login:
+    post:
+      tags:
+      - SignUp And Login
+      summary: user login
+      operationId: userlogin
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/userloginrequest'
+            example:
+              email: dupe@gmail.com
+              password: '12345'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /auth/logout:
+    get:
+      tags:
+      - SignUp And Login
+      summary: logout
+      operationId: logout
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /userprofile/61f2c020f4d42840945793d6:
+    put:
+      tags:
+      - Edit Profile
+      summary: update user profile
+      operationId: updateuserprofile
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateuserprofilerequest'
+            example:
+              firstName: Ebuka1
+              lastName: Okafor2
+              about: Oga patapata at the top
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /userprofile/61f2d6d9b1276d33416ea16a:
+    get:
+      tags:
+      - Edit Profile
+      summary: get user profile
+      operationId: getuserprofile
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /change_password/61f2c020f4d42840945793d6:
+    get:
+      tags:
+      - Change & Reset Password
+      summary: change user password
+      operationId: changeuserpassword
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /forgot_password:
+    post:
+      tags:
+      - Change & Reset Password
+      summary: user forgot password
+      operationId: userforgotpassword
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/userforgotpasswordrequest'
+            example:
+              email: bukasin1@gmail.com
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /reset_password/61f2c020f4d42840945793d6/0f26a2f5ecfae2d865d70a7213192bdc2d87c82de31e147213f193b1eb344084:
+    post:
+      tags:
+      - Change & Reset Password
+      summary: user reset password
+      operationId: userresetpassword
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/userresetpasswordrequest'
+            example:
+              password: bukas12345
+              passConfirm: bukas12345
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /groups:
+    post:
+      tags:
+      - Groups and Messages
+      summary: Create a new group
+      operationId: Createanewgroup
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateanewgroupRequest'
+            example:
+              group_name: testers
+              group_desc: we are the main testers
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /messages/g-message/61f5e1b0300ab21658b562e9:
+    post:
+      tags:
+      - Groups and Messages
+      summary: Create Group Messages
+      description: >-
+        As a registered user, I can create and send messages (videos, text, audio and files) to other registered groups I belong to.
+
+
+        **Usage**
+
+
+        Make a POST request to '/messages/p-message/:groupId'.
+      operationId: CreateGroupMessages
+      parameters: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              required:
+              - messageContent
+              type: object
+              properties:
+                messageContent:
+                  type: string
+                  example: This is a message content.
+        required: false
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /messages/p-message:
+    post:
+      tags:
+      - Groups and Messages
+      summary: Create Private messages
+      description: >-
+        As a registered user, I can create and send messages (videos, text, audio and files) to other registered users and groups.
+
+
+        **Usage**
+
+
+        Make a POST request to '/messages/p-message/:receiverId'.
+
+
+        **Sample Output**
+
+
+        `{ "message": "successful",`
+
+
+        `"newMessage": { "senderId": "61f93ddaf9c36b80077c783b",`
+
+
+        `"isRead":` **`false`**`,`
+
+
+        `"toFriend":` **`true`**`,`
+
+
+        `"toGroup":` **`false`**`,`
+
+
+        `"isDeleted":` **`false`**`,`
+
+
+        `"message": [ "`[`https://res.cloudinary.com/samsonajulor/image/upload/v1643801985/whatsapp-clone-uploads/tmp-1-1643801980768_tq30an.pdf"`](https://res.cloudinary.com/samsonajulor/image/upload/v1643801985/whatsapp-clone-uploads/tmp-1-1643801980768_tq30an.pdf) `],`
+
+
+        `"_id": "61fa6d812f55c44f3a73a520",`
+
+
+        `"createdAt": "2022-02-02T11:39:45.900Z", "updatedAt": "2022-02-02T11:39:45.900Z",`
+
+
+        `},`
+
+
+        `"messageContent": { "src": "`[`https://res.cloudinary.com/samsonajulor/image/upload/v1643801985/whatsapp-clone-uploads/tmp-1-1643801980768_tq30an.pdf"`](https://res.cloudinary.com/samsonajulor/image/upload/v1643801985/whatsapp-clone-uploads/tmp-1-1643801980768_tq30an.pdf) `}}`
+      operationId: CreatePrivatemessages
+      parameters: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              required:
+              - messageContent
+              type: object
+              properties:
+                messageContent:
+                  type: string
+                  example: This is a text or file.
+        required: false
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    get:
+      tags:
+      - Groups and Messages
+      summary: Get private messages
+      description: >-
+        As a registered user I have access to all messages I have sent to and received from other registered users through this route.
+
+
+        **Usage**
+
+
+        Make a GET request to '/messages/p-message/:messageId'.
+
+
+        **Expected Output**
+
+
+        `{`
+
+
+        `"0": {`
+
+
+        `"_id": "61f962cb9d7ff1c09cafadbf",`
+
+
+        `"senderId": "61f93ddaf9c36b80077c783b", "isRead":` **`false`**`,`
+
+
+        `"toFriend":` **`false`**`,`
+
+
+        `"toGroup":` **`true`**`, "isDeleted":` **`false`**`,`
+
+
+        `"message": [` **`null`** `],`
+
+
+        `"createdAt": "2022-02-01T16:41:47.881Z", "updatedAt": "2022-02-01T16:41:47.881Z", },`
+
+
+        `"1": {`
+
+
+        `"_id": "61f962d19d7ff1c09cafadc2",`
+
+
+        `"senderId": "61f93ddaf9c36b80077c783b", "isRead":` **`false`**`,`
+
+
+        `"toFriend":` **`false`**`,`
+
+
+        `"toGroup":` **`true`**`,`
+
+
+        `"isDeleted":` **`false`**`,`
+
+
+        `"message": [` **`null`** `],`
+
+
+        `"createdAt": "2022-02-01T16:41:53.035Z", "updatedAt": "2022-02-01T16:41:53.035Z",`
+
+
+        `"__v": 0 }}`
+      operationId: Getprivatemessages
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    put:
+      tags:
+      - Groups and Messages
+      summary: Delete Private Messages
+      operationId: DeletePrivateMessages
+      parameters: []
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding: {}
+            schema:
+              required:
+              - messageId
+              type: object
+              properties:
+                messageId:
+                  type: string
+                  example: 61f90ed09729bf22f8170b1f
+        required: false
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /messages/g-message/61f5db7c446e04a292bee987:
+    get:
+      tags:
+      - Groups and Messages
+      summary: Get Group Messages
+      description: >-
+        As a registered user I have access to all messages I have sent to and received from other groups registered users through this route.
+
+
+        **Usage**
+
+
+        Make a GET request to '/messages/g-message/:groupId'.
+
+
+        **Sample Output**
+
+
+        `{ "messages": [`
+
+
+        `{ "_id": "61f962cb9d7ff1c09cafadbf", "senderId": "61f93ddaf9c36b80077c783b", "isRead":` **`false`**`,`
+
+
+        `"toFriend":` **`false`**`,`
+
+
+        `"toGroup":` **`true`**`,`
+
+
+        `"isDeleted":` **`false`**`,`
+
+
+        `"message": [` **`null`** `],`
+
+
+        `"createdAt": "2022-02-01T16:41:47.881Z", "updatedAt": "2022-02-01T16:41:47.881Z", "__v": 0 },`
+
+
+        `{ "_id": "61f962d19d7ff1c09cafadc2", "senderId": "61f93ddaf9c36b80077c783b", "isRead":` **`false`**`,`
+
+
+        `"toFriend":` **`false`**`,`
+
+
+        `"toGroup":` **`true`**`,`
+
+
+        `"isDeleted":` **`false`**`,`
+
+
+        `"message": [` **`null`** `],`
+
+
+        `"createdAt": "2022-02-01T16:41:53.035Z", "updatedAt": "2022-02-01T16:41:53.035Z",`
+
+
+        `} ]}`
+      operationId: GetGroupMessages
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /messages/g-message/61f946bb2080b86bc3491a78:
+    put:
+      tags:
+      - Groups and Messages
+      summary: Delete Group Messages
+      operationId: DeleteGroupMessages
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /users/friends:
+    get:
+      tags:
+      - Add & Get All Friends
+      summary: Get All Friends
+      description: >-
+        As a registered user I can login into my account and **get all my friends**
+
+
+        **Usage**
+
+
+        Make a GET Request to '/users/friends'
+
+
+        **Sample Output**
+
+
+        `{`
+
+
+        `"status": "SUCCESS",`
+
+
+        `"friendList": [`
+
+
+        `{`
+
+
+        `"email": "`[`susan@gmail.com`](mailto:susan@gmail.com)`",`
+
+
+        `"isFavourite":` **`false`**`,`
+
+
+        `"fullName": "susan susan",`
+
+
+        `"_id": "61fbebfd437ee160f5dbf050"`
+
+
+        `},`
+
+
+        `{`
+
+
+        `"email": "`[`dupe@gmail.com`](mailto:dupe@gmail.com)`",`
+
+
+        `"isFavourite":` **`false`**`,`
+
+
+        `"fullName": "Seun Taiwo",`
+
+
+        `"_id": "61fbed92437ee160f5dbf075"`
+
+
+        `},`
+
+
+        `{`
+
+
+        `"email": "`[`adeola@gmail.com`](mailto:adeola@gmail.com)`",`
+
+
+        `"isFavourite":` **`false`**`,`
+
+
+        `"fullName": "Matthew abiola",`
+
+
+        `"_id": "61fbedc9437ee160f5dbf08e"`
+
+
+        `}`
+
+
+        `]}`
+      operationId: GetAllFriends
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /addfriend/61f2d6d9b1276d33416ea16a:
+    put:
+      tags:
+      - Add & Get All Friends
+      summary: Add Friends
+      description: >-
+        As a registered user I can login into my account and **search for users** and **add them as friends** using their unique email address.
+
+
+        **Usage**
+
+
+        Make a PUT Request to '/users/addfriend' and pass the friend to be email to the request body.
+
+
+        **Sample Output**
+
+
+        `{`
+
+
+        `"message": "You have successfully added to friend list the user with the email address",`
+
+
+        `"newFriend": {}`
+
+
+        `}`
+      operationId: AddFriends
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddFriendsRequest'
+            example:
+              email: foluso.kayode.ng@gmail.com
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /group/create_group:
+    post:
+      tags:
+      - Create Chat Group
+      summary: create new group
+      description: >-
+        As a registered user with a verified email address I can login into my account and **create a new group** using group name
+
+
+        **Usage**
+
+
+        Make a POST Request to '/group/create_group' and pass the group name to be the request body.
+
+
+        **Sample Output**
+
+
+        `{`
+
+
+        `"status": "SUCCESS",`
+
+
+        `"message": "Nodejs Family three group successfully created",`
+
+
+        `"info": {`
+
+
+        `"group_name": "Nodejs Family three", "group_members": [ "foluso2004@yahoo.com" ], "group_link": "http://localhost:5000/group/join?room=852b4aac373083f7d90076ecc085e4ef", "author": {`
+
+
+        `"name": "Oluwaseun Kayode",`
+
+
+        `"email": "foluso2004@yahoo.com"`
+
+
+        `},`
+
+
+        `"_id": "61fbe38668e0920e6680b99a",`
+
+
+        `"createdAt": "2022-02-03T14:15:34.920Z", "updatedAt": "2022-02-03T14:15:34.920Z",`
+
+
+        `"__v": 0`
+
+
+        `}}`
+      operationId: createnewgroup
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /group/join:
+    get:
+      tags:
+      - Create Chat Group
+      summary: join group by link
+      description: >-
+        As a registered with or without a verified email address I can **click on a group link and join the group**
+
+
+        **Usage**
+
+
+        Make a GET Request to '/group/join?room=uniqueValue' and user joins the group
+
+
+        **Sample Output**
+
+
+        `{`
+
+
+        `"status": "SUCCESS",`
+
+
+        `"message": "You have been successfully added to the group"`
+
+
+        `}`
+      operationId: joingroupbylink
+      parameters:
+      - name: room
+        in: query
+        description: ''
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: bfe4e57d0d353b5e23ad3b5800e96328
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /group/all:
+    get:
+      tags:
+      - Create Chat Group
+      summary: get all my groups
+      description: >-
+        As a registered with or without a verified email address I can **click on a group link and join the group**
+
+
+        **Usage**
+
+
+        Make a POST Request to '/group/all' and user joins the group
+
+
+        **Sample Output**
+
+
+        `[ {`
+
+
+        `"author": {`
+
+
+        `"name": "Matthew abiola",`
+
+
+        `"email": "adeola@gmail.com"`
+
+
+        `},`
+
+
+        `"_id": "61f959b33e546ab03008d895", "group_name": "Nodejs Team D Family", "group_members": [`
+
+
+        `"adeola@gmail.com", "fyuooluso.kayode.ng@gmail.com", "olfoluso.kayode.ng@gmail.com", "foluso.kayode.ng@gmail.com", "foluso2004ng@yahoo.com"`
+
+
+        `],`
+
+
+        `"group_link": "http://localhost:5000/group/join?room=acc78af20c14908451fb2945707ba1e3"`
+
+
+        `},`
+
+
+        `{`
+
+
+        `"author": {`
+
+
+        `"name": "Oluwaseun Kayode",`
+
+
+        `"email": "foluso2004@yahoo.com"`
+
+
+        `},`
+
+
+        `"_id": "61fab81861a9b8ca93e4cda0", "group_name": "Nodejs Family",`
+
+
+        `"group_members": [`
+
+
+        `"foluso2004@yahoo.com", "foluso2004ng@yahoo.com"`
+
+
+        `],`
+
+
+        `"group_link": "http://localhost:5000/group/join?room=3590c49f2b2a7129d5f6c81b387ee9ac"`
+
+
+        `}]`
+      operationId: getallmygroups
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /group/add_member:
+    post:
+      tags:
+      - Create Chat Group
+      summary: add to my group
+      description: >-
+        As a registered user with a verified email address I can add a user to the group I created using the user email address and the group link in the request body
+
+
+        **Usage**
+
+
+        Make a POST Request to '/group/add_member' and user joins the group
+
+
+        **Sample Output**
+
+
+        `{`
+
+
+        `"message": "user successfully added to group"`
+
+
+        `}`
+      operationId: addtomygroup
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/addtomygrouprequest'
+            example:
+              email: susan@gmail.com
+              group_link: http://localhost:5000/group/join?room=bfe4e57d0d353b5e23ad3b5800e96328
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /:
+    get:
+      tags:
+      - User Authentication
+      summary: User Logout
+      operationId: UserLogout
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /otheruserinfo/61fa8df3982cbb7c2f660512:
+    get:
+      tags:
+      - User and Group Info
+      summary: Get Other User's Info
+      description: >-
+        Get basic information about other users: Only registered user is given access to get informations about other users. User will receive a refresh verification email to access this end point.
+
+
+        **Usage:**
+
+
+        Make a GET request to /users/otheruserinfo/:usersId
+
+
+        **Expected output:**
+
+
+        `{ "Name": "Last_Name First_Name",`
+
+
+        `"Image": "image.png",`
+
+
+        `"About": "about"}`
+      operationId: GetOtherUser'sInfo
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /users/groupinfo/61f959b33e546ab03008d895:
+    get:
+      tags:
+      - User and Group Info
+      summary: Get Group Info
+      description: >-
+        Get basic information about a group: Only registered user is given access to get informations about a group. User will receive a refresh verification email to access this end point.
+
+
+        **Usage:**
+
+
+        `Make a GET request to /users/groupinfo/:groupId`
+
+
+        `Expected output:`
+
+
+        `{ "groupName": "group_name",`
+
+
+        `"groupImage": "group_image.jpg",`
+
+
+        `"groupDescription": "Group_description",`
+
+
+        `"groupMembers": [ "member_email" ],`
+
+
+        `"groupLink": "group_link`[`"`](http://localhost:5000/group/join?room=030eee2011058dea9a9f8bf296d8c522)
+
+
+        [`}`](http://localhost:5000/group/join?room=030eee2011058dea9a9f8bf296d8c522)
+      operationId: GetGroupInfo
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /users/userprofile:
+    get:
+      tags:
+      - User and Group Info
+      summary: Get User Profile
+      description: "Get basic information about other users: Only registered user is given access to get informations about other users. User will receive a refresh verification email to access this end point.\n\n**Usage:**  \nMake a GET request to /users/userprofile/\n\n**Expected output:**  \n`{ \"Message\": \"Success\",`\n\n`\"Name\": \"Foluso Kayode\",`\n\n`\"email\": \"folusolibrary@gmail.com\",`\n\n`\"phoneNumber\": \"08169606970\",`\n\n`\"profilePic\": \"https://www.kindpng.com/picc/m/207-2074624_white-gray-circle-avatar-png-transparent-png.png\",`\n\n`\"about\": \"\"}`"
+      operationId: GetUserProfile
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    put:
+      tags:
+      - User and Group Info
+      summary: Update User Profile
+      operationId: UpdateUserProfile
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserProfileRequest1'
+            example:
+              firstName: Momodu
+              isVerified: 'false'
+              about: I am a good boy
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /users/addfavoritefriend:
+    post:
+      tags:
+      - User and Group Info
+      summary: Add Favorite Friend
+      description: >-
+        As a User I want to be able to see the list of my favourites friends so I can chat with them.
+
+
+        Usage:
+
+
+        User should be able to make a get request : users/addfavoritefriend
+
+
+        The User should be able to add an existing friend to his list of favourites friends using the friend's email
+
+
+        Expected Output:
+
+
+        {
+
+
+        "status" : "user added successfully"
+
+
+        }
+      operationId: AddFavoriteFriend
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddFavoriteFriendRequest'
+            example:
+              email: foluso.kayode.ng@gmail.com
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /users/forgot_password:
+    post:
+      tags:
+      - Password
+      summary: forgot password
+      description: >-
+        As a registered user, i should be able to request for reset password if i forgot using my registered email.
+
+
+        **Usage**
+
+
+        Make a POST request to this end-point to request for the reset password link via the registered email provided in the body. The end is meant to send the link to the email provided.
+
+
+        **Sample Output**
+      operationId: forgotpassword
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/forgotpasswordrequest'
+            example:
+              email: example@gmail.com
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /users/reset_password/61fd87d30f30fdda93b01b3b/2bf315ed11a0476f80f5635210a9451e1029d57580dda39159214539feb9a068:
+    post:
+      tags:
+      - Password
+      summary: Reset Password
+      description: >-
+        As a registered user, i should be able to reset my password if i forgot it but still have my email.
+
+
+        **Usage**
+
+
+        Make POST request to this end-point by providing the new password you are to use for your account and confirm the password in the second field.
+
+
+        **Sample input:**
+
+
+        ``` json
+
+        {    "password":"129000",    "passConfirm":"129000"}
+
+
+        ```
+
+
+        **Sample Output**
+      operationId: ResetPassword
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResetPasswordRequest'
+            example:
+              password: '129000'
+              passConfirm: '129000'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /users/change_password/61e5e80ef2b08063cb0e4fb2:
+    get:
+      tags:
+      - Password
+      summary: Change Password
+      description: >-
+        As a logged in user i should be able to request to change my password anytime i feel like.
+
+
+        **Usage:**
+
+
+        Make a GET request to this end-point to change your password by providing the current password and intended new password
+
+
+        **Sample Input:**
+
+
+        ``` json
+
+        {    "oldPasswrd":"123456",    "password":"123456abc",    "passConfirm":"123456abc"      }
+
+
+        ```
+
+
+        **Sample Output**
+
+
+        ``` json
+         "message": "password reset succesfully"
+
+        ```
+      operationId: ChangePassword
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /search/search_friend/ade:
+    get:
+      tags:
+      - Search
+      summary: search friend
+      description: >-
+        As a login User i should able to search for a particular friends amidst all my friends
+
+
+        **Usage:**
+
+
+        Make a GET request to this end-point to search for your friend which are not your favourite. input the part/full character of the friend name in the input field to search.
+
+
+        **Sample Output:**
+
+
+        > { "result": \[ { "email": "[hademath1@gmail.com](mailto:hademath1@gmail.com)", "isFavourite": false, "fullName": "Adeleke Matthew", "_id": "61fa8f3e92e6961a8eacd1aa" }, { "email": "[ololade@gmail.com](mailto:ololade@gmail.com)", "isFavourite": false, "fullName": "ololade Davivid", "_id": "61fb10e9dea03bacd0987dee" } \]}
+      operationId: searchfriend
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /search/search_groups/testing:
+    get:
+      tags:
+      - Search
+      summary: Search groups
+      description: >-
+        As a login User i should able to search for the group i belong using
+
+
+        **Usage:**
+
+
+        Make a GET request to this end-point to search for the groups you belong. input the part/full character of the group name in the input field to search.
+
+
+        **Sample Output:**
+
+
+        ``` json
+
+        {    "result": [        {            "GroupName": "Testing Group",            "GroupMembers": [                "hademath1@gmail.com",                "anslem@gmail.com"            ],            "GroupAuthor": {                "name": "Adeleke Matthew",                "email": "hademath1@gmail.com"            }        }    ]}
+
+        ```
+      operationId: Searchgroups
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /search/search_favourite/abiola:
+    get:
+      tags:
+      - Search
+      summary: Search Favourite
+      description: >-
+        As a login User i should able to search for a particular friends amidst all my friends which are my favourite
+
+
+        **Usage:**
+
+
+        Make a GET request to this end-point to search for your friend which are your favourite. input the part/full character of the friend name in the input field to search.
+
+
+        **Sample Output:**
+
+
+        ``` json
+
+        {    "result": [        {            "email": "Adebayo@gmail.com",            "isFavourite": true,            "fullName": "Adebayo Turayo",            "_id": "61fa8f3e92e6961a8eacd1aa"        },        {            "email": "ololade@gmail.com",            "isFavourite": true,            "fullName": "ololade Davivid",            "_id": "61fb10e9dea03bacd0987dee"        }    ]}
+
+
+        ```
+      operationId: SearchFavourite
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+components:
+  schemas:
+    usersignuprequest:
+      title: usersignuprequest
+      required:
+      - firstName
+      - lastName
+      - email
+      - phoneNumber
+      - password
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        phoneNumber:
+          type: string
+        password:
+          type: string
+      example:
+        firstName: Foluso
+        lastName: Kayode
+        email: folusolibrary@gmail.com
+        phoneNumber: 08169606970
+        password: '12345'
+    userloginrequest:
+      title: userloginrequest
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: dupe@gmail.com
+        password: '12345'
+    updateuserprofilerequest:
+      title: updateuserprofilerequest
+      required:
+      - firstName
+      - lastName
+      - about
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        about:
+          type: string
+      example:
+        firstName: Ebuka1
+        lastName: Okafor2
+        about: Oga patapata at the top
+    userforgotpasswordrequest:
+      title: userforgotpasswordrequest
+      required:
+      - email
+      type: object
+      properties:
+        email:
+          type: string
+      example:
+        email: bukasin1@gmail.com
+    userresetpasswordrequest:
+      title: userresetpasswordrequest
+      required:
+      - password
+      - passConfirm
+      type: object
+      properties:
+        password:
+          type: string
+        passConfirm:
+          type: string
+      example:
+        password: bukas12345
+        passConfirm: bukas12345
+    CreateanewgroupRequest:
+      title: CreateanewgroupRequest
+      required:
+      - group_name
+      - group_desc
+      type: object
+      properties:
+        group_name:
+          type: string
+        group_desc:
+          type: string
+      example:
+        group_name: testers
+        group_desc: we are the main testers
+    AddFriendsRequest:
+      title: AddFriendsRequest
+      required:
+      - email
+      type: object
+      properties:
+        email:
+          type: string
+      example:
+        email: foluso.kayode.ng@gmail.com
+    addtomygrouprequest:
+      title: addtomygrouprequest
+      required:
+      - email
+      - group_link
+      type: object
+      properties:
+        email:
+          type: string
+        group_link:
+          type: string
+      example:
+        email: susan@gmail.com
+        group_link: http://localhost:5000/group/join?room=bfe4e57d0d353b5e23ad3b5800e96328
+    UserRegistrationRequest:
+      title: UserRegistrationRequest
+      required:
+      - firstName
+      - lastName
+      - email
+      - phoneNumber
+      - password
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        phoneNumber:
+          type: string
+        password:
+          type: string
+      example:
+        firstName: Zack
+        lastName: Bello
+        email: obomheire@yahoo.com
+        phoneNumber: 08030875576
+        password: Secret@123
+    UpdateUserProfileRequest1:
+      title: UpdateUserProfileRequest1
+      required:
+      - firstName
+      - isVerified
+      - about
+      type: object
+      properties:
+        firstName:
+          type: string
+        isVerified:
+          type: string
+        about:
+          type: string
+      example:
+        firstName: Momodu
+        isVerified: 'false'
+        about: I am a good boy
+    AddFavoriteFriendRequest:
+      title: AddFavoriteFriendRequest
+      required:
+      - email
+      type: object
+      properties:
+        email:
+          type: string
+      example:
+        email: foluso.kayode.ng@gmail.com
+    forgotpasswordrequest:
+      title: forgotpasswordrequest
+      required:
+      - email
+      type: object
+      properties:
+        email:
+          type: string
+      example:
+        email: example@gmail.com
+    ResetPasswordRequest:
+      title: ResetPasswordRequest
+      required:
+      - password
+      - passConfirm
+      type: object
+      properties:
+        password:
+          type: string
+        passConfirm:
+          type: string
+      example:
+        password: '129000'
+        passConfirm: '129000'
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+- name: SignUp And Login
+- name: Edit Profile
+- name: Change & Reset Password
+- name: Groups and Messages
+- name: Add & Get All Friends
+- name: Create Chat Group
+- name: User Authentication
+- name: User and Group Info
+- name: Password
+- name: Search

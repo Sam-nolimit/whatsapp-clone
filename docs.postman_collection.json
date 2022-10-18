@@ -1,0 +1,914 @@
+{
+	"info": {
+		"_postman_id": "4effcfe5-9748-43cd-beaf-4726fd70efd1",
+		"name": "WhatsApp Clone",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "SignUp And Login",
+			"item": [
+				{
+					"name": "user signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Foluso\",\n    \"lastName\": \"Kayode\",\n    \"email\": \"folusolibrary@gmail.com\",\n    \"phoneNumber\": \"08169606970\",\n    \"password\": \"12345\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"signup"
+							]
+						},
+						"description": "*User Story*  \n  \nAs a user, I want to be able to register using my email and choosing a password. A verification email should be sent to enable to verify my account.  \n  \n*+Acceptance Criteria:+*  \n * Input fields to enter are Email Address and Password.  \n * All fields should be required.  \n * Emails should be unique.  \n* Verification email must be sent on successful signup"
+					},
+					"response": []
+				},
+				{
+					"name": "user login",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"dupe@gmail.com\",\n    \"password\": \"12345\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/users/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Edit Profile",
+			"item": [
+				{
+					"name": "update user profile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJ1a2FzaW4xQGdtYWlsLmNvbSIsImlhdCI6MTY0MzI5OTA5NywiZXhwIjoxNjQzMzg1NDk3fQ._AfKIAdqSmIK_ai_kDqhkynJZvs2x9Zxl4Ggg48ZZV8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Ebuka1\",\n    \"lastName\":\"Okafor2\",\n    \"about\":\"Oga patapata at the top\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/userprofile/61f2c020f4d42840945793d6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"userprofile",
+								"61f2c020f4d42840945793d6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJ1a2FzaW4xQGdtYWlsLmNvbSIsImlhdCI6MTY0MzMwMTg5NCwiZXhwIjoxNjQzMzg4Mjk0fQ.Y2obQ3SsC4c0Lcd2VVVDv7P7FOJZVJwlzBDrf-1Bq_s",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/userprofile/61f2d6d9b1276d33416ea16a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"userprofile",
+								"61f2d6d9b1276d33416ea16a"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Change & Reset Password",
+			"item": [
+				{
+					"name": "change user password",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJ1a2FzaW4xQGdtYWlsLmNvbSIsImlhdCI6MTY0MzI5OTA5NywiZXhwIjoxNjQzMzg1NDk3fQ._AfKIAdqSmIK_ai_kDqhkynJZvs2x9Zxl4Ggg48ZZV8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\":\"bukas1234\",\n    \"passConfirm\":\"bukas1234\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/change_password/61f2c020f4d42840945793d6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"change_password",
+								"61f2c020f4d42840945793d6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user forgot password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"bukasin1@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/forgot_password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"forgot_password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user reset password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\":\"bukas12345\",\n    \"passConfirm\":\"bukas12345\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/reset_password/61f2c020f4d42840945793d6/0f26a2f5ecfae2d865d70a7213192bdc2d87c82de31e147213f193b1eb344084",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"reset_password",
+								"61f2c020f4d42840945793d6",
+								"0f26a2f5ecfae2d865d70a7213192bdc2d87c82de31e147213f193b1eb344084"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Groups and Messages",
+			"item": [
+				{
+					"name": "Create a new group",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"group_name\": \"testers\",\n    \"group_desc\": \"we are the main testers\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/groups",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Group Messages",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "messageContent",
+									"value": "This is a message content.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/messages/g-message/61f5e1b0300ab21658b562e9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"messages",
+								"g-message",
+								"61f5e1b0300ab21658b562e9"
+							]
+						},
+						"description": "As a registered user, I can create and send messages (videos, text, audio and files) to other registered groups I belong to.\n\n**Usage**\n\nMake a POST request to '/messages/p-message/:groupId'."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Private messages",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "messageContent",
+									"value": "This is a text or file.",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/messages/p-message",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"messages",
+								"p-message"
+							]
+						},
+						"description": "As a registered user, I can create and send messages (videos, text, audio and files) to other registered users and groups.\n\n**Usage**\n\nMake a POST request to '/messages/p-message/:receiverId'.\n\n**Sample Output**\n\n`{ \"message\": \"successful\",`\n\n`\"newMessage\": { \"senderId\": \"61f93ddaf9c36b80077c783b\",`\n\n`\"isRead\":` **`false`**`,`\n\n`\"toFriend\":` **`true`**`,`\n\n`\"toGroup\":` **`false`**`,`\n\n`\"isDeleted\":` **`false`**`,`\n\n`\"message\": [ \"`[`https://res.cloudinary.com/samsonajulor/image/upload/v1643801985/whatsapp-clone-uploads/tmp-1-1643801980768_tq30an.pdf\"`](https://res.cloudinary.com/samsonajulor/image/upload/v1643801985/whatsapp-clone-uploads/tmp-1-1643801980768_tq30an.pdf) `],`\n\n`\"_id\": \"61fa6d812f55c44f3a73a520\",`\n\n`\"createdAt\": \"2022-02-02T11:39:45.900Z\", \"updatedAt\": \"2022-02-02T11:39:45.900Z\",`\n\n`},`\n\n`\"messageContent\": { \"src\": \"`[`https://res.cloudinary.com/samsonajulor/image/upload/v1643801985/whatsapp-clone-uploads/tmp-1-1643801980768_tq30an.pdf\"`](https://res.cloudinary.com/samsonajulor/image/upload/v1643801985/whatsapp-clone-uploads/tmp-1-1643801980768_tq30an.pdf) `}}`"
+					},
+					"response": []
+				},
+				{
+					"name": "Get private messages",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/messages/p-message/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"messages",
+								"p-message",
+								""
+							]
+						},
+						"description": "As a registered user I have access to all messages I have sent to and received from other registered users through this route.\n\n**Usage**\n\nMake a GET request to '/messages/p-message/:messageId'.\n\n**Expected Output**\n\n`{`\n\n`\"0\": {`\n\n`\"_id\": \"61f962cb9d7ff1c09cafadbf\",`\n\n`\"senderId\": \"61f93ddaf9c36b80077c783b\", \"isRead\":` **`false`**`,`\n\n`\"toFriend\":` **`false`**`,`\n\n`\"toGroup\":` **`true`**`, \"isDeleted\":` **`false`**`,`\n\n`\"message\": [` **`null`** `],`\n\n`\"createdAt\": \"2022-02-01T16:41:47.881Z\", \"updatedAt\": \"2022-02-01T16:41:47.881Z\", },`\n\n`\"1\": {`\n\n`\"_id\": \"61f962d19d7ff1c09cafadc2\",`\n\n`\"senderId\": \"61f93ddaf9c36b80077c783b\", \"isRead\":` **`false`**`,`\n\n`\"toFriend\":` **`false`**`,`\n\n`\"toGroup\":` **`true`**`,`\n\n`\"isDeleted\":` **`false`**`,`\n\n`\"message\": [` **`null`** `],`\n\n`\"createdAt\": \"2022-02-01T16:41:53.035Z\", \"updatedAt\": \"2022-02-01T16:41:53.035Z\",`\n\n`\"__v\": 0 }}`"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Group Messages",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/messages/g-message/61f5db7c446e04a292bee987",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"messages",
+								"g-message",
+								"61f5db7c446e04a292bee987"
+							]
+						},
+						"description": "As a registered user I have access to all messages I have sent to and received from other groups registered users through this route.\n\n**Usage**\n\nMake a GET request to '/messages/g-message/:groupId'.\n\n**Sample Output**\n\n`{ \"messages\": [`\n\n`{ \"_id\": \"61f962cb9d7ff1c09cafadbf\", \"senderId\": \"61f93ddaf9c36b80077c783b\", \"isRead\":` **`false`**`,`\n\n`\"toFriend\":` **`false`**`,`\n\n`\"toGroup\":` **`true`**`,`\n\n`\"isDeleted\":` **`false`**`,`\n\n`\"message\": [` **`null`** `],`\n\n`\"createdAt\": \"2022-02-01T16:41:47.881Z\", \"updatedAt\": \"2022-02-01T16:41:47.881Z\", \"__v\": 0 },`\n\n`{ \"_id\": \"61f962d19d7ff1c09cafadc2\", \"senderId\": \"61f93ddaf9c36b80077c783b\", \"isRead\":` **`false`**`,`\n\n`\"toFriend\":` **`false`**`,`\n\n`\"toGroup\":` **`true`**`,`\n\n`\"isDeleted\":` **`false`**`,`\n\n`\"message\": [` **`null`** `],`\n\n`\"createdAt\": \"2022-02-01T16:41:53.035Z\", \"updatedAt\": \"2022-02-01T16:41:53.035Z\",`\n\n`} ]}`"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Private Messages",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "messageId",
+									"value": "61f90ed09729bf22f8170b1f",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:5000/messages/p-message",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"messages",
+								"p-message"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Group Messages",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/messages/g-message/61f946bb2080b86bc3491a78",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"messages",
+								"g-message",
+								"61f946bb2080b86bc3491a78"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Add & Get All Friends",
+			"item": [
+				{
+					"name": "Get All Friends",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJ1a2FzaW4xQGdtYWlsLmNvbSIsImlhdCI6MTY0MzMwNDcxMywiZXhwIjoxNjQzMzkxMTEzfQ.PJKfEOgcl31f9hn1ZTqNj-XiJyqRhR2z0etUW3Nm6Xg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:5000/users/friends",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"friends"
+							]
+						},
+						"description": "As a registered user I can login into my account and **get all my friends**\n\n**Usage**\n\nMake a GET Request to '/users/friends'\n\n**Sample Output**\n\n`{`\n\n`\"status\": \"SUCCESS\",`\n\n`\"friendList\": [`\n\n`{`\n\n`\"email\": \"`[`susan@gmail.com`](mailto:susan@gmail.com)`\",`\n\n`\"isFavourite\":` **`false`**`,`\n\n`\"fullName\": \"susan susan\",`\n\n`\"_id\": \"61fbebfd437ee160f5dbf050\"`\n\n`},`\n\n`{`\n\n`\"email\": \"`[`dupe@gmail.com`](mailto:dupe@gmail.com)`\",`\n\n`\"isFavourite\":` **`false`**`,`\n\n`\"fullName\": \"Seun Taiwo\",`\n\n`\"_id\": \"61fbed92437ee160f5dbf075\"`\n\n`},`\n\n`{`\n\n`\"email\": \"`[`adeola@gmail.com`](mailto:adeola@gmail.com)`\",`\n\n`\"isFavourite\":` **`false`**`,`\n\n`\"fullName\": \"Matthew abiola\",`\n\n`\"_id\": \"61fbedc9437ee160f5dbf08e\"`\n\n`}`\n\n`]}`"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Friends",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImJ1a2FzaW4xQGdtYWlsLmNvbSIsImlhdCI6MTY0MzMwNDcxMywiZXhwIjoxNjQzMzkxMTEzfQ.PJKfEOgcl31f9hn1ZTqNj-XiJyqRhR2z0etUW3Nm6Xg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"foluso.kayode.ng@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/addfriend/61f2d6d9b1276d33416ea16a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"addfriend",
+								"61f2d6d9b1276d33416ea16a"
+							]
+						},
+						"description": "As a registered user I can login into my account and **search for users** and **add them as friends** using their unique email address.\n\n**Usage**\n\nMake a PUT Request to '/users/addfriend' and pass the friend to be email to the request body.\n\n**Sample Output**\n\n`{`\n\n`\"message\": \"You have successfully added to friend list the user with the email address\",`\n\n`\"newFriend\": {}`\n\n`}`"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Create Chat Group",
+			"item": [
+				{
+					"name": "create new group",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": ""
+						},
+						"description": "As a registered user with a verified email address I can login into my account and **create a new group** using group name\n\n**Usage**\n\nMake a POST Request to '/group/create_group' and pass the group name to be the request body.\n\n**Sample Output**\n\n`{`\n\n`\"status\": \"SUCCESS\",`\n\n`\"message\": \"Nodejs Family three group successfully created\",`\n\n`\"info\": {`\n\n`\"group_name\": \"Nodejs Family three\", \"group_members\": [ \"foluso2004@yahoo.com\" ], \"group_link\": \"http://localhost:5000/group/join?room=852b4aac373083f7d90076ecc085e4ef\", \"author\": {`\n\n`\"name\": \"Oluwaseun Kayode\",`\n\n`\"email\": \"foluso2004@yahoo.com\"`\n\n`},`\n\n`\"_id\": \"61fbe38668e0920e6680b99a\",`\n\n`\"createdAt\": \"2022-02-03T14:15:34.920Z\", \"updatedAt\": \"2022-02-03T14:15:34.920Z\",`\n\n`\"__v\": 0`\n\n`}}`"
+					},
+					"response": []
+				},
+				{
+					"name": "join group by link",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						},
+						"description": "As a registered with or without a verified email address I can **click on a group link and join the group**\n\n**Usage**\n\nMake a GET Request to '/group/join?room=uniqueValue' and user joins the group\n\n**Sample Output**\n\n`{`\n\n`\"status\": \"SUCCESS\",`\n\n`\"message\": \"You have been successfully added to the group\"`\n\n`}`"
+					},
+					"response": []
+				},
+				{
+					"name": "get all my groups",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						},
+						"description": "As a registered with or without a verified email address I can **click on a group link and join the group**\n\n**Usage**\n\nMake a POST Request to '/group/all' and user joins the group\n\n**Sample Output**\n\n`[ {`\n\n`\"author\": {`\n\n`\"name\": \"Matthew abiola\",`\n\n`\"email\": \"adeola@gmail.com\"`\n\n`},`\n\n`\"_id\": \"61f959b33e546ab03008d895\", \"group_name\": \"Nodejs Team D Family\", \"group_members\": [`\n\n`\"adeola@gmail.com\", \"fyuooluso.kayode.ng@gmail.com\", \"olfoluso.kayode.ng@gmail.com\", \"foluso.kayode.ng@gmail.com\", \"foluso2004ng@yahoo.com\"`\n\n`],`\n\n`\"group_link\": \"http://localhost:5000/group/join?room=acc78af20c14908451fb2945707ba1e3\"`\n\n`},`\n\n`{`\n\n`\"author\": {`\n\n`\"name\": \"Oluwaseun Kayode\",`\n\n`\"email\": \"foluso2004@yahoo.com\"`\n\n`},`\n\n`\"_id\": \"61fab81861a9b8ca93e4cda0\", \"group_name\": \"Nodejs Family\",`\n\n`\"group_members\": [`\n\n`\"foluso2004@yahoo.com\", \"foluso2004ng@yahoo.com\"`\n\n`],`\n\n`\"group_link\": \"http://localhost:5000/group/join?room=3590c49f2b2a7129d5f6c81b387ee9ac\"`\n\n`}]`"
+					},
+					"response": []
+				},
+				{
+					"name": "add to my group",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/group/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"group",
+								""
+							]
+						},
+						"description": "As a registered user with a verified email address I can add a user to the group I created using the user email address and the group link in the request body\n\n**Usage**\n\nMake a POST Request to '/group/add_member' and user joins the group\n\n**Sample Output**\n\n`{`\n\n`\"message\": \"user successfully added to group\"`\n\n`}`"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Authentication",
+			"item": [
+				{
+					"name": "User Registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Zack\",\n    \"lastName\": \"Bello\",\n    \"email\": \"obomheire@yahoo.com\",\n    \"phoneNumber\": \"08030875576\",\n    \"password\": \"Secret@123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/users/signup",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"signup"
+							]
+						},
+						"description": "User registration route: User is expected to register/signup with First Name, Last Name, Valid Email, Valid Phone Number and a Password not less than 6 characters length.\n\nAn email verification link will be sent to the email address provided after a successful registration.\n\n**Usage:**\n\nMake a POST request to /users/signup\n\n**Expected Output:**\n\n{ \"message\": \"Verification email has been sent to your email account\", \"emailToken\": \"Token goes here...\"}"
+					},
+					"response": []
+				},
+				{
+					"name": "User Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"obomheire@yahoo.com\",\n    \"password\": \"Secret@123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/users/login",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"users",
+								"login"
+							]
+						},
+						"description": "User Login route: Only registered user is given the access to login. User is expected to login with their registered Email and a Password.\n\nUnverified user will have a limited access after a successful login. However a refresh email verification will be sent to the user for restricted access point.\n\n**Usage:**\n\nMake a POST request to /users/login\n\n**Expected Success Output:**\n\n{ \"Message\": \"User successfully login\", \"accessToken\": \"Access Token goes here...\"}"
+					},
+					"response": []
+				},
+				{
+					"name": "User Logout",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User and Group Info",
+			"item": [
+				{
+					"name": "Get Other User's Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						},
+						"description": "Get basic information about other users: Only registered user is given access to get informations about other users. User will receive a refresh verification email to access this end point.\n\n**Usage:**\n\nMake a GET request to /users/othetuserinfo/other_users_id\n\n**Expected output:**\n\n{ \"Name\": \"Last_Name First_Name\", \"Image\": \"image.png\", \"About\": \"about\"}"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Group Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						},
+						"description": "Get basic information about a group: Only registered user is given access to get informations about a group. User will receive a refresh verification email to access this end point.\n\n**Usage:**\n\nMake a GET request to /users/groupinfo/group_id\n\nExpected output:\n\n{ \"groupName\": \"group_name\", \"groupImage\": \"group_image.jpg\", \"groupDescription\": \"Group_description\", \"groupMembers\": \\[ \"member_email\" \\], \"groupLink\": \"group_link[\"}](http://localhost:5000/group/join?room=030eee2011058dea9a9f8bf296d8c522)"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Group",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/group/create_group/",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"group",
+								"create_group",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Join Group",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET USER PROFILE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						},
+						"description": "Get basic information about other users: Only registered user is given access to get informations about other users. User will receive a refresh verification email to access this end point.\n\n  \nUsage:  \nMake a GET request to /users/userprofile/\n\n  \nExpected output:  \n{ \"_id\": \"61f945c5daa23198d9c2c2ad\", \"firstName\": \"Taribo\", \"lastName\": \"Opotu\", \"email\": \"fistotech@gmail.com\", \"phoneNumber\": \"08098987957\", \"isVerified\": true, \"profilePic\": \"https://www.kindpng.com/picc/m/207-2074624_white-gray-circle-avatar-png-transparent-png.png\", \"emailToken\": null, \"cloudinary_id\": \"\", \"password\": \"$2b$10$d3TTvSlwSbPYu7cUwx35v.PzmO5spXP1YunDLhq/uc/YLPJEtDHUW\", \"provider\": \"local\", \"about\": \"\", \"date\": \"2022-02-01T14:37:29.961Z\", \"friends\": \\[ { \"email\": \"xnotime247@gmail.com\", \"isFavourite\": true, \"fullName\": \"Taribo Opotu\", \"_id\": \"61f999a69dd1c16d76d884af\" }, { \"email\": \"taribo.tamex@gmail.com\", \"isFavourite\": true, \"fullName\": \"Taribo Opotu\", \"_id\": \"61f999c39dd1c16d76d884b8\" }, { \"email\": \"jamesoputibeya@gmail.com\", \"isFavourite\": true, \"fullName\": \"Taribo Opotu\", \"_id\": \"61f999dd9dd1c16d76d884c3\" }, { \"email\": \"xnotime247@yah00.com\", \"isFavourite\": false, \"fullName\": \"Taribo Opotu\", \"_id\": \"61f99ba09dd1c16d76d88507\" } \\], \"__v\": 1, \"groupId\": \\[\\]}"
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE USER PROFILE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL FAVORITE FRIENDS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						},
+						"description": "As a User I want to be able to see the list of my favuorites friends so I can chat with them.\n\nUsage:\n\nUser should make a post request :user/getallfavoritefriends\n\nOutput: this will display the list of all friends added to favouritefriends.\n\nExpected output:\n\n{\n\n\"Status\" : \"Success\",\n\n\"Favourite\" : \\[\n\n\"Taribo Opotu\"\n\n\"Taribo Opotu\",\n\n\"Taribo Opotu\"\n\n\\]\n\n}"
+					},
+					"response": []
+				},
+				{
+					"name": "ADD FAVORITE FRIEND",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						},
+						"description": "As a User I want to be able to see the list of my favourites friends so I can chat with them.\n\nUsage:\n\nUser should be able to make a get request : users/addfavoritefriend\n\nThe User should be able to add an existing friend to his list of favourites friends using the friend's email\n\nExpected Output:\n\n{\n\n\"status\" : \"user added successfully\"\n\n}"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Search",
+			"item": [
+				{
+					"name": "search friend",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						},
+						"description": "As a login User i should able to search for a particular friends amidst all my friends\n\n**Usage:**\n\nMake a GET request to this end-point to search for your friend which are not your favourite. input the part/full character of the friend name in the input field to search.\n\n**Sample Output:**\n\n> { \"result\": \\[ { \"email\": \"[hademath1@gmail.com](mailto:hademath1@gmail.com)\", \"isFavourite\": false, \"fullName\": \"Adeleke Matthew\", \"_id\": \"61fa8f3e92e6961a8eacd1aa\" }, { \"email\": \"[ololade@gmail.com](mailto:ololade@gmail.com)\", \"isFavourite\": false, \"fullName\": \"ololade Davivid\", \"_id\": \"61fb10e9dea03bacd0987dee\" } \\]}"
+					},
+					"response": []
+				},
+				{
+					"name": "Search groups",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						},
+						"description": "As a login User i should able to search for the group i belong using\n\n**Usage:**\n\nMake a GET request to this end-point to search for the groups you belong. input the part/full character of the group name in the input field to search.\n\n**Sample Output:**\n\n``` json\n{    \"result\": [        {            \"GroupName\": \"Testing Group\",            \"GroupMembers\": [                \"hademath1@gmail.com\",                \"anslem@gmail.com\"            ],            \"GroupAuthor\": {                \"name\": \"Adeleke Matthew\",                \"email\": \"hademath1@gmail.com\"            }        }    ]}\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "Search Favourite",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						},
+						"description": "As a login User i should able to search for a particular friends amidst all my friends which are my favourite\n\n**Usage:**\n\nMake a GET request to this end-point to search for your friend which are your favourite. input the part/full character of the friend name in the input field to search.\n\n**Sample Output:**\n\n``` json\n{    \"result\": [        {            \"email\": \"Adebayo@gmail.com\",            \"isFavourite\": true,            \"fullName\": \"Adebayo Turayo\",            \"_id\": \"61fa8f3e92e6961a8eacd1aa\"        },        {            \"email\": \"ololade@gmail.com\",            \"isFavourite\": true,            \"fullName\": \"ololade Davivid\",            \"_id\": \"61fb10e9dea03bacd0987dee\"        }    ]}\n\n```"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Password",
+			"item": [
+				{
+					"name": "forgot password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"segunsd55@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/forgot_password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"forgot_password"
+							]
+						},
+						"description": "As a registered user, i should be able to request for reset password if i forgot using my registered email.\n\n**Usage**\n\nMake a POST request to this end-point to request for the reset password link via the registered email provided in the body. The end is meant to send the link to the email provided.\n\n**Sample Output**"
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": ""
+						},
+						"description": "As a registered user, i should be able to reset my password if i forgot it but still have my email.\n\n**Usage**\n\nMake POST request to this end-point by providing the new password you are to use for your account and confirm the password in the second field.\n\n**Sample input:**\n\n``` json\n{    \"password\":\"129000\",    \"passConfirm\":\"129000\"}\n\n```\n\n**Sample Output**"
+					},
+					"response": []
+				},
+				{
+					"name": "Change Password",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n    \"password\":\"124544\"\n  \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/change_password/61e5e80ef2b08063cb0e4fb2\n",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"change_password",
+								"61e5e80ef2b08063cb0e4fb2\n"
+							]
+						},
+						"description": "As a logged in user i should be able to request to change my password anytime i feel like.\n\n**Usage:**\n\nMake a GET request to this end-point to change your password by providing the current password and intended new password\n\n**Sample Input:**\n\n``` json\n{    \"oldPasswrd\":\"123456\",    \"password\":\"123456abc\",    \"passConfirm\":\"123456abc\"      }\n\n```\n\n**Sample Output**\n\n``` json\n \"message\": \"password reset succesfully\"\n\n```"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
