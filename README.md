@@ -1,9 +1,5 @@
-
-1. installed passport, express, express-session, passport-google-oauth2 and their types
-
-
 # WhatsApp Clone
-
+installed passport, express, express-session, passport-google-oauth2 and their types
 
 # user signup
 POST
